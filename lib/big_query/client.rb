@@ -18,8 +18,7 @@ module BigQuery
         :application_version => BigQuery::VERSION
       )
 
-      key = Google::APIClient::PKCS12.load_key(File.open(
-        opts['key'], :mode => 'rb'),
+      key = Google::APIClient::PKCS12.load_key(File.open(opts['key'], 'rb'),
         "notasecret"
       )
 
