@@ -10,8 +10,8 @@ module BigQuery
       def query(given_query, options={})
         timeout = options.fetch(:timeout, 90 * 1000)
         response = api(
-          api_method: @bq.jobs.query,
-          body_object: { 'query' => given_query,
+          :api_method => @bq.jobs.query,
+          :body_object => { 'query' => given_query,
                          'timeoutMs' => timeout}
         )
 

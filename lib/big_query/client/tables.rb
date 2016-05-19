@@ -34,8 +34,8 @@ module BigQuery
       # @param dataset [String] dataset to look for
       # @return [Hash] json api response
       def table_data(tableId, dataset = @dataset)
-        response = api(api_method: @bq.tabledata.list,
-                       parameters: { 'datasetId' => dataset,
+        response = api(:api_method => @bq.tabledata.list,
+                       :parameters => { 'datasetId' => dataset,
                                      'tableId' => tableId })
         response['rows'] || []
       end
@@ -53,10 +53,10 @@ module BigQuery
         end
 
         api(
-          api_method: @bq.tabledata.insert_all,
-          parameters: { 'tableId' => tableId,
+          :api_method => @bq.tabledata.insert_all,
+          :parameters => { 'tableId' => tableId,
                         'datasetId' => @dataset },
-          body_object: body
+          :body_object => body
         )
       end
 
@@ -71,9 +71,9 @@ module BigQuery
       # @bq.create_table('new_table', price: { type: 'FLOAT' })
       def create_table(tableId, schema={})
         api(
-          api_method: @bq.tables.insert,
-          parameters: { "datasetId" => @dataset },
-          body_object: { "tableReference" => {
+          :api_method => @bq.tables.insert,
+          :parameters => { "datasetId" => @dataset },
+          :body_object => { "tableReference" => {
                             "tableId" => tableId,
                             "projectId" => @project_id,
                             "datasetId" => @dataset
@@ -89,8 +89,8 @@ module BigQuery
       #
       # @param tableId [String] table id to insert into
       def delete_table(tableId)
-        api(api_method: @bq.tables.delete,
-            parameters: { 'tableId' => tableId,
+        api(:api_method => @bq.tables.delete,
+            :parameters => { 'tableId' => tableId,
                           'datasetId' => @dataset }
         )
       end
@@ -102,8 +102,8 @@ module BigQuery
       # @return [Hash] json api response
       def describe_table(tableId, dataset = @dataset)
         api(
-          api_method: @bq.tables.get,
-          parameters: { 'tableId' => tableId,
+          :api_method => @bq.tables.get,
+          :parameters => { 'tableId' => tableId,
                         'datasetId' => @dataset }
         )
       end

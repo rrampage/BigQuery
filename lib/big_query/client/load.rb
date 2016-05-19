@@ -8,8 +8,8 @@ module BigQuery
       # @return [Hash]
       def load(opts)
         api(
-          api_method: @bq.jobs.insert,
-          body_object: {
+          :api_method => @bq.jobs.insert,
+          :body_object => {
             'configuration' => {
               'load' => opts
             }
