@@ -11,8 +11,8 @@ module BigQuery
       def job(id, opts = {})
         opts['jobId'] ||= id
 
-        api(api_method: @bq.jobs.get,
-            parameters: opts)
+        api(:api_method => @bq.jobs.get,
+            :parameters => opts)
       end
 
       # lists all the jobs
@@ -20,8 +20,8 @@ module BigQuery
       # @param options [Hash] bigquery opts accepted
       # @return [Hash] json api response
       def jobs(opts = {})
-        api(api_method: @bq.jobs.list,
-            parameters: opts)
+        api(:api_method => @bq.jobs.list,
+            :parameters => opts)
       end
 
       # Gets the results of a given job
@@ -32,8 +32,8 @@ module BigQuery
       def get_query_results(id, opts = {})
         opts['jobId'] ||= id
 
-        api(api_method: @bq.jobs.get_query_results,
-            parameters: opts)
+        api(:api_method => @bq.jobs.get_query_results,
+            :parameters => opts)
       end
 
       # Insert a job
@@ -41,8 +41,8 @@ module BigQuery
       # @param options [Hash] hash of job options 
       # @return [Hash] json api response
       def insert_job(opts)
-        api(api_method: @bq.jobs.insert,
-            body_object: {configuration: opts})
+        api(:api_method => @bq.jobs.insert,
+            :body_object => {:configuration => opts})
       end
     end
   end

@@ -10,7 +10,7 @@ class BigQueryTest < MiniTest::Unit::TestCase
     if @bq.tables_formatted.include? 'test'
       @bq.delete_table('test')
     end
-    result = @bq.create_table('test', id: { type: 'INTEGER', mode: 'REQUIRED' }, type: { type: 'STRING', mode: 'NULLABLE' })
+    result = @bq.create_table('test', :id => { :type => 'INTEGER', :mode => 'REQUIRED' }, :type => { :type => 'STRING', :mode => 'NULLABLE' })
   end
 
   def config
@@ -44,16 +44,16 @@ class BigQueryTest < MiniTest::Unit::TestCase
     end
 
     schema = {
-      id: { type: 'INTEGER'},
-      city: {
-        name:"city",
-        type:"RECORD",
-        mode: "nullable",
-        fields: {
-          id: {name:"id", type:"INTEGER" },
-          name: {name:"name", type:"STRING" },
-          country: { name:"country", type:"STRING" },
-          time: { name:"time", type:"TIMESTAMP" }
+      :id => { :type => 'INTEGER'},
+      :city => {
+        :name =>"city",
+        :type =>"RECORD",
+        :mode => "nullable",
+        :fields => {
+          :id => {:name =>"id", :type =>"INTEGER" },
+          :name => {:name =>"name", :type =>"STRING" },
+          :country => { :name =>"country", :type =>"STRING" },
+          :time => { :name =>"time", :type =>"TIMESTAMP" }
         }
       }
     }
@@ -79,7 +79,7 @@ class BigQueryTest < MiniTest::Unit::TestCase
 
   def test_for_delete_table
     if !@bq.tables_formatted.include? 'test123'
-      @bq.create_table('test123', id: { type: 'INTEGER' })
+      @bq.create_table('test123', :id => { :type => 'INTEGER' })
     end
     result = @bq.delete_table('test123')
 
@@ -128,7 +128,7 @@ class BigQueryTest < MiniTest::Unit::TestCase
   end
 
   def test_for_insert_job
-    result = @bq.insert_job(query: {query: "SELECT * FROM [#{config['dataset']}.test] LIMIT 1"})
+    result = @bq.insert_job(:query => {:query => "SELECT * FROM [#{config['dataset']}.test] LIMIT 1"})
 
     assert_equal result['kind'], "bigquery#job"
   end
