@@ -11,6 +11,7 @@ module BigQuery
         body_object = options.dup
         body_object['query'] = given_query
         body_object['timeoutMs'] = options.fetch(:timeout, 90 * 1000)
+        body_object.delete(:timeout)
         response = api(
           :api_method => @bq.jobs.query,
           :body_object => body_object
