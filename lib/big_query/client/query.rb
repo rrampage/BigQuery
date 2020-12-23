@@ -19,6 +19,9 @@ module BigQuery
         query_request.max_results      = options[:maxResults] if options[:maxResults]
         query_request.dry_run          = options[:dryRun] if options.has_key?(:dryRun)
         query_request.use_query_cache  = options[:useQueryCache] if options.has_key?(:useQueryCache)
+        query_request.use_legacy_sql   = options[:useLegacySql] if options.has_key?(:useLegacySql)
+        query_request.query_parameters = options[:queryParameters] if options.has_key?(:queryParameters)
+        query_request.parameter_mode   = options[:parameterMode] if options.has_key?(:parameterMode)
 
         api(
           @client.query_job(
